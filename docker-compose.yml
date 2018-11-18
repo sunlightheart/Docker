@@ -1,0 +1,19 @@
+db:
+    image: sameersbn/postgresql
+    environment:
+        - DB_NAME=redmine_production
+        - DB_USER=redmine
+        - DB_PASS=password
+    volumes:
+        - /var/lib/postgresql
+
+redmine:
+    image: sameersbn/redmine
+    environment:
+        - REDMINE_PORT=10083
+    volumes:
+        - /home/redmine/data
+    links:
+        - db:postgresql
+    ports:
+        - 10083:80
